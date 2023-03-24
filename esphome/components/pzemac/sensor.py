@@ -32,6 +32,9 @@ AUTO_LOAD = ["modbus"]
 pzemac_ns = cg.esphome_ns.namespace("pzemac")
 PZEMAC = pzemac_ns.class_("PZEMAC", cg.PollingComponent, modbus.ModbusDevice)
 
+# Actions
+ResetEnergyAction = pzemac_ns.class_("ResetEnergyAction", automation.Action)
+
 CONFIG_SCHEMA = (
     cv.Schema(
         {
