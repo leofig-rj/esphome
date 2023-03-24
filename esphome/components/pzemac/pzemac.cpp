@@ -73,7 +73,8 @@ void PZEMAC::update() {
     if (this->update_ok_count_down_ > 0)
       this->update_ok_count_down_--;
   } else {
-    this->update_ok_count_down_ = this->update_filter_;
+    //this->update_ok_count_down_ = this->update_filter_;
+    this->update_ok_count_down_ = 0;
     if (this->update_not_ok_count_down_ > 0) {
       this->update_not_ok_count_down_--;
     } else {
@@ -107,6 +108,13 @@ void PZEMAC::dump_config() {
   LOG_SENSOR("", "Energy", this->energy_sensor_);
   LOG_SENSOR("", "Frequency", this->frequency_sensor_);
   LOG_SENSOR("", "Power Factor", this->power_factor_sensor_);
+}
+
+  void PZEMAC::reset_energy_() {
+  std::vector<uint8_t> cmd;
+  cmd.push_back(this->address_);
+  cmd.push_back(PZEM_CMD_RESET_ENERGY);
+  this->send_raw(cmd);
 }
 
 }  // namespace pzemac
